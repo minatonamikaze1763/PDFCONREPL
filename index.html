@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bulk PDF Content Replacer</title>
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- PDF.js for rendering previews -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <!-- pdf-lib for editing and merging -->
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <!-- FileSaver for saving files -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  
+</head>
+
+<body>
+  <div class="app">
+    <header>
+      <h1>Bulk PDF Content Replacer</h1>
+      <div class="theme-note">Light green theme</div>
+    </header>
+    
+    <main>
+      <section class="left-panel">
+        <div class="upload-area">
+          <label class="upload-label">
+            <input id="fileInput" type="file" accept="application/pdf" multiple />
+            <span>Choose PDFs</span>
+          </label>
+          <small>Upload multiple PDF files. They'll be listed below.</small>
+        </div>
+        
+        <div class="file-list" id="fileList"></div>
+        
+        <div class="actions">
+          <button id="proceedBtn" class="btn primary" disabled>Proceed for Edit</button>
+        </div>
+      </section>
+      
+      <section class="editor-panel">
+        <div class="editor-top">
+          <div class="preview-controls">
+            <div class="nav-left">
+              <button id="prevPage" class="btn">◀</button>
+              <span id="currentPageLabel">Page 0 / 0</span>
+              <button id="nextPage" class="btn">▶</button>
+            </div>
+            
+            <div class="tools">
+              <button id="addRectBtn" class="btn">+ New Element</button>
+              <button id="clearRectsBtn" class="btn">Clear Rects</button>
+            </div>
+          </div>
+          
+          <div class="style-controls">
+            <label>Padding <input type="number" id="paddingControl" value="4" min="0" /></label>
+            <label>Border radius <input type="number" id="radiusControl" value="4" min="0" /></label>
+            <label>Font size <input type="number" id="fontSizeControl" value="12" min="4" /></label>
+            <label>Text color <input type="color" id="colorControl" value="#064e3b" /></label>
+          </div>
+        </div>
+        
+        <div class="editor-body">
+          <aside class="thumbs" id="thumbs"></aside>
+          
+          <div class="preview-wrap">
+            <div class="preview-canvas" id="previewContainer">
+              <!-- pdf.js canvases will be appended here -->
+              <canvas id="pdfCanvas"></canvas>
+              <!-- overlay for drawing rects -->
+              <div id="overlay" class="overlay"></div>
+            </div>
+          </div>
+          
+          <aside class="recent" id="recent">
+            <h3>Recent actions</h3>
+            <div id="recentList"></div>
+          </aside>
+        </div>
+        
+        <div class="editor-bottom">
+          <input id="replacementText" placeholder="Replacement text for all pages (applied to every rect on every page)" />
+          <button id="replaceBtn" class="btn success">Replace & Download</button>
+        </div>
+      </section>
+    </main>
+    
+    <footer>
+      <small>Persona: Nandhu (web dev)</small>
+    </footer>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+
+</html>

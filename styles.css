@@ -1,0 +1,272 @@
+:root {
+  --bg: #f6fff8;
+  --panel: #ffffff;
+  --muted: #6b7280;
+  --accent: #10b981;
+  /* green */
+  --accent-strong: #065f46;
+  --border: rgba(6, 95, 70, 0.08);
+  --radius: 10px;
+  --glass: rgba(255, 255, 255, 0.6);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+html,
+body,
+#root {
+  height: 100%
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--accent-strong);
+}
+
+.app {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 16px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.theme-note {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+main {
+  display: flex;
+  gap: 12px;
+}
+
+.left-panel {
+  width: 260px;
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 12px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.upload-label {
+  display: block;
+  padding: 12px;
+  border: 1px dashed var(--border);
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.04), transparent);
+}
+
+.upload-label input {
+  display: none;
+}
+
+.file-list {
+  max-height: 360px;
+  overflow: auto;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.file-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+}
+
+.file-name {
+  font-size: 13px;
+  color: var(--accent-strong);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn.success {
+  background: #059669;
+  color: white;
+}
+
+.btn.danger {
+  background: #ef4444;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.editor-panel {
+  flex: 1;
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 8px;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+}
+
+.preview-controls {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.style-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.editor-body {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.thumbs {
+  width: 80px;
+  border-right: 1px solid var(--border);
+  padding: 6px;
+  overflow: auto;
+}
+
+.thumb {
+  height: 90px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.preview-wrap {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.preview-canvas {
+  position: relative;
+  max-width: 100%;
+  max-height: 72vh;
+  box-shadow: 0 6px 18px rgba(6, 95, 70, 0.06);
+  border-radius: 6px;
+  background: white;
+}
+
+#pdfCanvas {
+  display: block;
+  max-width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.rect {
+  position: absolute;
+  border: 2px dashed rgba(6, 95, 70, 0.6);
+  background: rgba(16, 185, 129, 0.06);
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+
+.recent {
+  width: 260px;
+  border-left: 1px solid var(--border);
+  padding: 6px;
+  overflow: auto;
+}
+
+.editor-bottom {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  border-top: 1px solid var(--border);
+  align-items: center;
+}
+
+.editor-bottom input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+
+footer {
+  text-align: center;
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+/* small screens */
+@media (max-width:900px) {
+  .app {
+    padding: 8px;
+  }
+  
+  .left-panel {
+    display: none;
+  }
+  
+  .recent {
+    display: none;
+  }
+}
