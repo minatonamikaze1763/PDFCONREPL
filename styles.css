@@ -194,19 +194,33 @@ main {
   flex: 1;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 8px;
+  overflow: auto; /* ✅ allow scrolling */
+  background: var(--glass);
 }
 
 .preview-canvas {
   position: relative;
-  max-width: 100%;
-  max-height: 72vh;
-  box-shadow: 0 6px 18px rgba(6, 95, 70, 0.06);
-  border-radius: 6px;
+  display: inline-block;
   background: white;
+  box-shadow: 0 6px 18px rgba(6,95,70,0.06);
+  border-radius: 6px;
+  margin: auto;
+  min-width: 600px;
+  min-height: 400px;
 }
-
+#pdfCanvas {
+  display: block;
+  width: 100%; /* ✅ fit container width */
+  height: auto; /* ✅ maintain aspect ratio */
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+}
 #pdfCanvas {
   display: block;
   max-width: 100%;

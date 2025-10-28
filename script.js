@@ -91,9 +91,15 @@ async function renderPage(pageNum) {
   const viewport = page.getViewport({ scale: pdfScale });
   pdfCanvas.width = viewport.width;
   pdfCanvas.height = viewport.height;
-  pdfCanvas.style.width = viewport.width + 'px';
-  pdfCanvas.style.height = viewport.height + 'px';
   
+  // make it scale visually but still keep coordinate mapping correct
+  pdfCanvas.style.width = "100%";
+  pdfCanvas.style.height = "auto";
+  
+  // sync overlay size after canvas draws
+  overlay.style.width = pdfCanvas.offsetWidth + 'px';
+  overlay.style.height = pdfCanvas.offsetHeight + 'px';
+  overlay.innerHTML = '';
   const ctx = pdfCanvas.getContext('2d');
   ctx.clearRect(0, 0, pdfCanvas.width, pdfCanvas.height);
   
@@ -370,8 +376,10 @@ thumbs.addEventListener('click', (e) => {
   const c = e.target.closest('canvas');
   if (!c) return;
   const idx = Array.from(thumbs.children).indexOf(c);
-  if (idx >= 0) { currentPage = idx + 1;
-    renderPage(currentPage); }
+  if (idx >= 0) {
+    currentPage = idx + 1;
+    renderPage(currentPage);
+  }
 });
 
 // END of script.js
