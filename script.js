@@ -349,15 +349,21 @@ replaceBtn.addEventListener('click', async () => {
 });
 
 function hexToRgb01(hex) {
-  // returns {r,g,b} in 0..1
-  const raw = hex.replace('#', '');
-  const bigint = parseInt(raw, 16);
+  if (!hex || typeof hex !== "string") {
+    // fallback: dark green
+    return { r: 0.1, g: 0.4, b: 0.3 };
+  }
+  const match = hex.match(/^#?([a-f\d]{6})$/i);
+  if (!match) {
+    // fallback if not valid hex
+    return { r: 0.1, g: 0.4, b: 0.3 };
+  }
+  const bigint = parseInt(match[1], 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
   return { r: r / 255, g: g / 255, b: b / 255 };
 }
-
 // small helper: if user clicks a file row's edit button it opens that file
 // (already wired above). Extra: clicking thumb navigates to that page
 thumbs.addEventListener('click', (e) => {
